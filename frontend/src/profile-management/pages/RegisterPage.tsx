@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import axios, { isAxiosError } from "axios";
 import type { UserRegister } from "../models/User";
 import ErrorMessage from "../components/ErrorMessage";
 
@@ -15,12 +16,24 @@ function RegisterPage() {
   const {
     register,
     watch,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm<UserRegister>({ defaultValues: initialValues });
 
-  const handleRegister = (formData: UserRegister) => {
-    console.log(formData);
+  const handleRegister = async (formData: UserRegister) => {
+    try {
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/auth/register`,
+        formData
+      );
+      console.log(data);
+      reset();
+    } catch (error) {
+      if (isAxiosError(error) && error.response) {
+        console.error(error.response.data.error);
+      }
+    }
   };
 
   return (
