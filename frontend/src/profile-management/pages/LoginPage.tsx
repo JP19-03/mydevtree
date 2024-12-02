@@ -22,7 +22,7 @@ function LoginPage() {
   const handleLogin = async (formData: UserLogin) => {
     try {
       const { data } = await api.post(`/auth/login`, formData);
-      toast.success(data);
+      localStorage.setItem("AUTH_TOKEN", data);
       reset();
     } catch (error) {
       if (isAxiosError(error) && error.response) {
