@@ -47,7 +47,7 @@ function DevTree({ data }: DevTreeProps) {
           </div>
         </main>
       </div>
-      <Toaster position="top-right" />
+      <Toaster position="top-right" richColors />
     </>
   );
 }
