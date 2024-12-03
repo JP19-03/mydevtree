@@ -1,6 +1,7 @@
 import { Link, Outlet } from "react-router-dom";
 import { Toaster } from "sonner";
 import { useQuery } from "@tanstack/react-query";
+import { Navigate } from "react-router-dom";
 import NavigationTabs from "../components/NavigationTabs";
 import { getUser } from "../../profile-management/services/user.service";
 
@@ -12,7 +13,8 @@ export default function AppLayout() {
     refetchOnWindowFocus: false,
   });
 
-  console.log(data);
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <Navigate to="/auth/login" />;
 
   return (
     <>
