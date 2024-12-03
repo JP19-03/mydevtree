@@ -2,13 +2,19 @@ export type User = {
     handle: string;
     name: string;
     email: string;
-    password: string;
     _id: string;
+    description: string;
 }
 
-export type UserRegister = Pick<User, "handle" | "name" | "email" | "password"> & {
+export type UserRegister = Pick<User, "handle" | "name" | "email"> & {
     password: string;
     password_confirmation: string;
 }
 
-export type UserLogin = Pick<User, "email" | "password">;
+export type UserLogin = Pick<User, "email"> & {
+    password: string;
+}
+
+export type ProfileForm = Pick<User, "handle" | "description"> & {
+    image: File | null;
+}
