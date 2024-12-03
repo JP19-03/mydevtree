@@ -3,6 +3,7 @@ export type User = {
     name: string;
     email: string;
     password: string;
+    _id: string;
 }
 
 export type UserRegister = Pick<User, "handle" | "name" | "email" | "password"> & {
