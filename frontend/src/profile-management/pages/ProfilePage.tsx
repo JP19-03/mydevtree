@@ -27,6 +27,7 @@ function ProfilePage() {
     },
     onSuccess: (data) => {
       toast.success(data);
+      queryClient.invalidateQueries({ queryKey: ["user"] });
     },
   });
 
