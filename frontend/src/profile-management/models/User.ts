@@ -4,6 +4,7 @@ export type User = {
     email: string;
     _id: string;
     description: string;
+    image: string;
 }
 
 export type UserRegister = Pick<User, "handle" | "name" | "email"> & {
@@ -15,6 +16,4 @@ export type UserLogin = Pick<User, "email"> & {
     password: string;
 }
 
-export type ProfileForm = Pick<User, "handle" | "description"> & {
-    image: File | null;
-}
+export type ProfileForm = Pick<User, "handle" | "description">;
