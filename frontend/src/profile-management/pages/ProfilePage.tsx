@@ -3,7 +3,7 @@ import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import ErrorMessage from "../components/ErrorMessage";
 import { ProfileForm, User } from "../models/User";
-import { updateProfile } from "../services/user.service";
+import { updateProfile, uploadImage } from "../services/user.service";
 
 function ProfilePage() {
   const queryClient = useQueryClient();
@@ -30,6 +30,22 @@ function ProfilePage() {
       queryClient.invalidateQueries({ queryKey: ["user"] });
     },
   });
+
+  const uploadImageMutation = useMutation({
+    mutationFn: uploadImage,
+    onError: (error) => {
+      console.log(error.message);
+    },
+    onSuccess: (data) => {
+      console.log(data);
+    },
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      uploadImageMutation.mutate(e.target.files[0]);
+    }
+  };
 
   const handleUserProfileForm = (formData: ProfileForm) => {
     updateProfileMutation.mutate(formData);
@@ -80,7 +96,7 @@ function ProfilePage() {
           name="handle"
           className="border-none bg-slate-100 rounded-lg p-2"
           accept="image/*"
-          onChange={() => {}}
+          onChange={handleChange}
         />
       </div>
 
