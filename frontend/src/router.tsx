@@ -5,7 +5,8 @@ import AuthLayout from "./profile-management/layouts/AuthLayout";
 import AppLayout from "./application-management/layouts/AppLayout";
 import LinkTreePage from "./application-management/pages/LinkTreePage";
 import ProfilePage from "./profile-management/pages/ProfilePage";
-import HandlePage from "./application-management/pages/HandlePage";
+import HandlePage from "./profile-management/pages/HandlePage";
+import NotFoundPage from "./application-management/pages/NotFoundPage";
 
 export default function Router() {
   return (
@@ -23,6 +24,10 @@ export default function Router() {
 
         <Route path="/:handle" element={<AuthLayout />}>
           <Route element={<HandlePage />} index={true} />
+        </Route>
+
+        <Route path="/404" element={<AuthLayout />}>
+          <Route element={<NotFoundPage />} index={true} />
         </Route>
       </Routes>
     </BrowserRouter>
