@@ -5,6 +5,7 @@ import AuthLayout from "./profile-management/layouts/AuthLayout";
 import AppLayout from "./application-management/layouts/AppLayout";
 import LinkTreePage from "./application-management/pages/LinkTreePage";
 import ProfilePage from "./profile-management/pages/ProfilePage";
+import HandlePage from "./application-management/pages/HandlePage";
 
 export default function Router() {
   return (
@@ -18,6 +19,10 @@ export default function Router() {
         <Route path="/admin" element={<AppLayout />}>
           <Route index={true} element={<LinkTreePage />} />
           <Route path="profile" element={<ProfilePage />} />
+        </Route>
+
+        <Route path="/:handle" element={<AuthLayout />}>
+          <Route element={<HandlePage />} index={true} />
         </Route>
       </Routes>
     </BrowserRouter>
