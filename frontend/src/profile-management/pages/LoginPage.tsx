@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { isAxiosError } from "axios";
@@ -7,6 +7,8 @@ import { UserLogin } from "../models/User";
 import api from "../../config/axios";
 
 function LoginPage() {
+  const navigate = useNavigate();
+
   const initialValues: UserLogin = {
     email: "",
     password: "",
@@ -14,7 +16,6 @@ function LoginPage() {
 
   const {
     register,
-    reset,
     handleSubmit,
     formState: { errors },
   } = useForm({ defaultValues: initialValues });
@@ -23,7 +24,7 @@ function LoginPage() {
     try {
       const { data } = await api.post(`/auth/login`, formData);
       localStorage.setItem("AUTH_TOKEN", data);
-      reset();
+      navigate("/admin");
     } catch (error) {
       if (isAxiosError(error) && error.response) {
         toast.error(error.response.data.error);

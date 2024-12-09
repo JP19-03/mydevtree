@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { isAxiosError } from "axios";
 import { toast } from "sonner";
@@ -9,10 +9,12 @@ import api from "../../config/axios";
 function RegisterPage() {
   const location = useLocation();
 
+  const navigate = useNavigate();
+
   const initialValues = {
     name: "",
     email: "",
-    handle: location.state.handle || "",
+    handle: location?.state?.handle || "",
     password: "",
     password_confirmation: "",
   };
@@ -30,6 +32,7 @@ function RegisterPage() {
       const { data } = await api.post(`/auth/register`, formData);
       toast.success(data);
       reset();
+      navigate("/auth/login");
     } catch (error) {
       if (isAxiosError(error) && error.response) {
         toast.error(error.response.data.error);
