@@ -3,7 +3,7 @@ import slugify from "react-slugify";
 import { useMutation } from "@tanstack/react-query";
 import ErrorMessage from "../../profile-management/components/ErrorMessage";
 import { searchByHandle } from "../../profile-management/services/user.service";
-import { data, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function SearchForm() {
   const {
