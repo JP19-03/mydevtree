@@ -3,7 +3,7 @@ import slugify from "react-slugify";
 import { useMutation } from "@tanstack/react-query";
 import ErrorMessage from "../../profile-management/components/ErrorMessage";
 import { searchByHandle } from "../../profile-management/services/user.service";
-import { Link } from "react-router-dom";
+import { data, Link } from "react-router-dom";
 
 function SearchForm() {
   const {
@@ -49,7 +49,10 @@ function SearchForm() {
         )}
         {mutation.data && (
           <p className="text-center text-cyan-500 font-black">
-            {mutation.data} go to <Link to={"/auth/register"}>Register</Link>
+            {mutation.data} go to{" "}
+            <Link to={"/auth/register"} state={{ handle: slugify(handle) }}>
+              Register
+            </Link>
           </p>
         )}
       </div>
